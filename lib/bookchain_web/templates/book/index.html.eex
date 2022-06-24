@@ -1,0 +1,25 @@
+<h1>Listing Books</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+
+      <th><span class="button" style="float:right"><%= link "New", to: Routes.book_path(@conn, :new) %></span></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for book <- @books do %>
+    <tr>
+      <td style="width:40%"><%= book.title %></td>
+      <td style="width:32%"><%= book.author %></td>
+      <td style="width:28%">
+        <span class="button"><%= link "Find holders", to: Routes.book_path(@conn, :show, book) %></span>
+        <span class="button"><%= link "Edit", to: Routes.book_path(@conn, :edit, book) %></span>
+        <span class="button delete"><%= link "Delete", to: Routes.book_path(@conn, :delete, book), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

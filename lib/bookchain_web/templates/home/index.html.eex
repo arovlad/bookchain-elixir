@@ -1,0 +1,8 @@
+<section class="phx-hero">
+  <h1>Home Page</h1>
+  <p>Peace of mind from prototype to production</p>
+
+  <span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>
+  <span><%= link "Login", to: Routes.login_path(@conn, :index) %></span>
+  <span><%= link "Register", to: Routes.register_path(@conn, :index) %></span>
+</section>
