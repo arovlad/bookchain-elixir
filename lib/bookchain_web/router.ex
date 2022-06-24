@@ -20,6 +20,9 @@ defmodule BookchainWeb.Router do
     resources "/register", UserController
     resources "/home", HomeController
     resources "/login", LoginController
+    resources "/users_books", UserBookController
+    resources "/users_books_requests", UserBookRequestsController
+    resources "/users_roles", UserRoleController
     get "/", PageController, :index
 
     get "/sign-in", SessionController, :new

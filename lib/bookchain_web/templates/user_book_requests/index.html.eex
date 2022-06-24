@@ -1,0 +1,30 @@
+<h1>Listing Users books requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Book</th>
+      <th>Status</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for user_book_requests <- @users_books_requests do %>
+    <tr>
+      <td><%= user_book_requests.user %></td>
+      <td><%= user_book_requests.book %></td>
+      <td><%= user_book_requests.status %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.user_book_requests_path(@conn, :show, user_book_requests) %></span>
+        <span><%= link "Edit", to: Routes.user_book_requests_path(@conn, :edit, user_book_requests) %></span>
+        <span><%= link "Delete", to: Routes.user_book_requests_path(@conn, :delete, user_book_requests), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New User book requests", to: Routes.user_book_requests_path(@conn, :new) %></span>
