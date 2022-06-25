@@ -17,7 +17,7 @@ defmodule BookchainWeb.Router do
     pipe_through :browser
 
     resources "/books", BookController
-    resources "/register", UserController
+    resources "/users", UserController
     resources "/home", HomeController
     resources "/login", LoginController
     resources "/users_books", UserBookController
@@ -27,7 +27,7 @@ defmodule BookchainWeb.Router do
 
     get "/sign-in", SessionController, :new
     post "/sign-in", SessionController, :create
-    get "/sign-out", SessionController, :delete
+    delete "/sign-out", SessionController, :delete
 
   end
 

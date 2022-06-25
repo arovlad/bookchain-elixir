@@ -18,8 +18,8 @@ defmodule BookchainWeb.UserBookController do
     case UsersBooks.create_user_book(user_book_params) do
       {:ok, user_book} ->
         conn
-        |> put_flash(:info, "User book created successfully.")
-        |> redirect(to: Routes.user_book_path(conn, :show, user_book))
+        # |> put_flash(:info, "User book created successfully.")
+        # |> redirect(to: Routes.user_book_path(conn, :show, user_book))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

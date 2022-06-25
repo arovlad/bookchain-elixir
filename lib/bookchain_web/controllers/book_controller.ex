@@ -1,10 +1,12 @@
 defmodule BookchainWeb.BookController do
   use BookchainWeb, :controller
 
+  alias Bookchain.UsersBooks
   alias Bookchain.Books
   alias Bookchain.Books.Book
   alias Bookchain.Users
   alias Bookchain.Users.User
+  alias BookchainWeb.UserBookController
 
   def index(conn, _params) do
     books = Books.list_books()
@@ -35,6 +37,13 @@ defmodule BookchainWeb.BookController do
   def create(conn, %{"book" => book_params}) do
     case Books.create_book(book_params) do
       {:ok, book} ->
+        user_id = get_session(conn, :current_user_id)
+        current_user = Users.get_user!(user_id)
+        conn
+        |> assign(:current_user, current_user)
+
+        ## UsersBooks.create_user_book(%{book: 6, user: current_user}) ## !!!!
+        UserBookController.create(conn, %{"user_book" => %{"book" => 6, "user" => current_user}})
         conn
         |> put_flash(:info, "Book created successfully.")
         |> redirect(to: Routes.book_path(conn, :show, book))
