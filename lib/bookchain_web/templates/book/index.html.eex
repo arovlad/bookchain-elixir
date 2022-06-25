@@ -4,9 +4,6 @@
   token = Phoenix.Controller.get_csrf_token()
   %>
 </div>
-
-<h1>Listing Books</h1>
-
 <table>
   <thead>
     <tr>

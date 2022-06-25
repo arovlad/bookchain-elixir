@@ -34,3 +34,21 @@
   display: block;
   margin: -1rem 0 2rem;
 }
+
+.button a {
+  color: white;
+}
+
+.button.delete {
+  background:red;
+  border-color:red;
+}
+
+.button.delete:hover {
+  background:grey;
+  border-color:grey;
+}
+
+.container {
+  max-width: 90%;
+}
