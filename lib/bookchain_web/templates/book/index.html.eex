@@ -17,7 +17,7 @@
       <td style="width:28%">
         <span class="button"><%= link "Find holders", to: Routes.book_path(@conn, :show, book) %></span>
         <span class="button"><%= link "Edit", to: Routes.book_path(@conn, :edit, book) %></span>
-        <span class="button delete"><%= link "Delete", to: Routes.book_path(@conn, :delete, book), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span class="button delete"><%= link "Delete", to: Routes.book_path(@conn, :delete, book), method: :delete %></span>
       </td>
     </tr>
 <% end %>

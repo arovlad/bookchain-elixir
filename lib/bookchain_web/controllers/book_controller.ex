@@ -14,6 +14,7 @@ defmodule BookchainWeb.BookController do
   end
 
   plug :check_auth when action in [:new, :create, :edit, :update, :delete, :show, :index]
+  # plug :create_user_book when action in [:create]
 
   defp check_auth(conn, _args) do
     if user_id = get_session(conn, :current_user_id) do
@@ -29,6 +30,11 @@ defmodule BookchainWeb.BookController do
     end
   end
 
+  # defp create_user_book(conn, book_id) do
+  #   current_user =  get_session(conn, :current_user_id)
+  #   UserBookController.create(conn, %{"user_book" => %{"book" => book_id, "user" => current_user}})
+  # end
+
   def new(conn, _params) do
     changeset = Books.change_book(%Book{})
     render(conn, "new.html", changeset: changeset)
@@ -37,17 +43,11 @@ defmodule BookchainWeb.BookController do
   def create(conn, %{"book" => book_params}) do
     case Books.create_book(book_params) do
       {:ok, book} ->
-        user_id = get_session(conn, :current_user_id)
-        current_user = Users.get_user!(user_id)
-        conn
-        |> assign(:current_user, current_user)
-
-        ## UsersBooks.create_user_book(%{book: 6, user: current_user}) ## !!!!
-        UserBookController.create(conn, %{"user_book" => %{"book" => 6, "user" => current_user}})
+        current_user =  get_session(conn, :current_user_id)
+        UserBookController.create(conn, %{"user_book" => %{"book" => book.id, "user" => current_user}})
         conn
         |> put_flash(:info, "Book created successfully.")
         |> redirect(to: Routes.book_path(conn, :show, book))
-
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -80,7 +80,10 @@ defmodule BookchainWeb.BookController do
 
   def delete(conn, %{"id" => id}) do
     book = Books.get_book!(id)
+    entry_id = book.id
     {:ok, _book} = Books.delete_book(book)
+
+    UserBookController.delete(conn,  %{"id" => entry_id})
 
     conn
     |> put_flash(:info, "Book deleted successfully.")

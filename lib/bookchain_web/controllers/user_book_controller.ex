@@ -56,7 +56,7 @@ defmodule BookchainWeb.UserBookController do
     {:ok, _user_book} = UsersBooks.delete_user_book(user_book)
 
     conn
-    |> put_flash(:info, "User book deleted successfully.")
-    |> redirect(to: Routes.user_book_path(conn, :index))
+    # |> put_flash(:info, "User book deleted successfully.")
+    # |> redirect(to: Routes.user_book_path(conn, :index))
   end
 end
