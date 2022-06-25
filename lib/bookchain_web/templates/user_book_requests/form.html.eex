@@ -20,4 +20,7 @@
   <div>
     <%= submit "Save" %>
   </div>
+  <script>
+    console.log("works");
+  </script>
 <% end %>

@@ -89,4 +89,9 @@ defmodule BookchainWeb.BookController do
     |> put_flash(:info, "Book deleted successfully.")
     |> redirect(to: Routes.book_path(conn, :index))
   end
+
+  def request_from_user(conn, %{"id" => id}) do
+    conn
+    |> put_flash(:info, "works.")
+  end
 end

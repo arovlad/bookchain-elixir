@@ -1,3 +1,10 @@
+<div style="display:none">
+  <%=
+  user_id = @conn.private.plug_session["current_user_id"]
+  token = Phoenix.Controller.get_csrf_token()
+  %>
+</div>
+
 <h1>Listing Books</h1>
 
 <table>
@@ -15,7 +22,18 @@
       <td style="width:40%"><%= book.title %></td>
       <td style="width:32%"><%= book.author %></td>
       <td style="width:28%">
-        <span class="button"><%= link "Find holders", to: Routes.book_path(@conn, :show, book) %></span>
+        <form action="/users_books_requests" method="post" style="margin:0 4px 0 0;float:left">
+          <input name="_csrf_token" type="hidden" value=<%= token %>>
+          <input style="display:none" id="user_book_requests_user" name="user_book_requests[user]" type="number"
+          value=<%= user_id %>>
+          <input style="display:none" id="user_book_requests_book" name="user_book_requests[book]" type="number"
+          value=<%= book.id %>>
+          <input style="display:none" id="user_book_requests_status" name="user_book_requests[status]" type="number"
+          value="0">
+          <button type="submit">Request</button>
+        </form>
+        <%# <%= link "Request", to: Routes.user_book_requests_path(@conn, :new) %>
+        <%# <span class="button"><%= link "Find holders", to: Routes.book_path(@conn, :show, book) %></span>
         <span class="button"><%= link "Edit", to: Routes.book_path(@conn, :edit, book) %></span>
         <span class="button delete"><%= link "Delete", to: Routes.book_path(@conn, :delete, book), method: :delete %></span>
       </td>
