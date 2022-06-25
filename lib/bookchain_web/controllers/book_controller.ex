@@ -71,7 +71,7 @@ defmodule BookchainWeb.BookController do
       {:ok, book} ->
         conn
         |> put_flash(:info, "Book updated successfully.")
-        |> redirect(to: Routes.book_path(conn, :show, book))
+        |> redirect(to: Routes.book_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", book: book, changeset: changeset)
