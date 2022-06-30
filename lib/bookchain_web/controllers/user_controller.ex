@@ -30,6 +30,7 @@ defmodule BookchainWeb.UserController do
   def show(conn, %{"id" => id}) do
     user = Users.get_user!(id)
     render(conn, "show.html", user: user)
+    #render(users_books_requests)
   end
 
   def edit(conn, %{"id" => id}) do
